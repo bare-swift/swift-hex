@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 // Copyright (c) 2026 The bare-swift Project Authors.
 
-/// Hex — replace this doc with a one-line description of the module.
-public enum Hex {
-    // TODO: implement the module's public API here.
-    // Remove this enum and replace with real types as the implementation grows.
-}
+/// Sendable, Foundation-free hex encoding and decoding.
+///
+/// Public API is namespaced under `Hex` (general-purpose) and `Hex.ConstantTime`
+/// (constant-time variants for crypto contexts).
+public enum Hex: Sendable {}
