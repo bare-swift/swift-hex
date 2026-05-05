@@ -40,7 +40,6 @@ public enum Hex: Sendable {
         encode(bytes, uppercase: true)
     }
 
-    @inlinable
     static func encode(_ bytes: some Sequence<UInt8>, uppercase: Bool) -> String {
         var ascii: [UInt8] = []
         ascii.reserveCapacity(bytes.underestimatedCount * 2)
