@@ -29,4 +29,32 @@ public enum Hex: Sendable {
         }
         return output
     }
+
+    /// Encode bytes as a lowercase hex string (no separators).
+    public static func encode(_ bytes: some Sequence<UInt8>) -> String {
+        encode(bytes, uppercase: false)
+    }
+
+    /// Encode bytes as an uppercase hex string (no separators).
+    public static func encodeUppercase(_ bytes: some Sequence<UInt8>) -> String {
+        encode(bytes, uppercase: true)
+    }
+
+    @inlinable
+    static func encode(_ bytes: some Sequence<UInt8>, uppercase: Bool) -> String {
+        var ascii: [UInt8] = []
+        ascii.reserveCapacity(bytes.underestimatedCount * 2)
+        for byte in bytes {
+            let hi = byte >> 4
+            let lo = byte & 0x0f
+            if uppercase {
+                ascii.append(HexNibble.nibbleToASCIIUpper(hi))
+                ascii.append(HexNibble.nibbleToASCIIUpper(lo))
+            } else {
+                ascii.append(HexNibble.nibbleToASCIILower(hi))
+                ascii.append(HexNibble.nibbleToASCIILower(lo))
+            }
+        }
+        return String(decoding: ascii, as: UTF8.self)
+    }
 }
